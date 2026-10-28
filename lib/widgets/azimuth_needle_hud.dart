@@ -56,7 +56,7 @@ class AzimuthNeedleHud extends StatelessWidget {
                   color: const Color(0xFF111827),
                   boxShadow: [
                     BoxShadow(
-                      color: accentColor.withOpacity(isAligned ? 0.35 : 0.12),
+                      color: accentColor.withValues(alpha: isAligned ? 0.35 : 0.12),
                       blurRadius: isAligned ? 36 : 24,
                       spreadRadius: isAligned ? 6 : 2,
                     ),
@@ -71,21 +71,23 @@ class AzimuthNeedleHud extends StatelessWidget {
               // Rotating Compass Rose Ticks (rotates opposite of device heading)
               Transform.rotate(
                 angle: -deviceHeading * pi / 180.0,
-                child: CustomPaint(
-                  size: const Size.infinite,
-                  painter: _CompassDialPainter(
-                    dialColor: const Color(0xFF334155),
-                    cardinalColor: const Color(0xFF94A3B8),
+                child: SizedBox.expand(
+                  child: CustomPaint(
+                    painter: _CompassDialPainter(
+                      dialColor: const Color(0xFF334155),
+                      cardinalColor: const Color(0xFF94A3B8),
+                    ),
                   ),
                 ),
               ),
 
               // Concentric Range Rings (Radar Aesthetic)
-              CustomPaint(
-                size: const Size.infinite,
-                painter: _RadarGridPainter(
-                  gridColor: const Color(0xFF1E293B).withOpacity(0.8),
-                  isLocked: isAligned,
+              SizedBox.expand(
+                child: CustomPaint(
+                  painter: _RadarGridPainter(
+                    gridColor: const Color(0xFF1E293B).withValues(alpha: 0.8),
+                    isLocked: isAligned,
+                  ),
                 ),
               ),
 
@@ -93,11 +95,12 @@ class AzimuthNeedleHud extends StatelessWidget {
               if (hasTarget)
                 Transform.rotate(
                   angle: needleRotationRad,
-                  child: CustomPaint(
-                    size: const Size.infinite,
-                    painter: _TargetNeedlePainter(
-                      color: accentColor,
-                      isAligned: isAligned,
+                  child: SizedBox.expand(
+                    child: CustomPaint(
+                      painter: _TargetNeedlePainter(
+                        color: accentColor,
+                        isAligned: isAligned,
+                      ),
                     ),
                   ),
                 ),
@@ -115,7 +118,7 @@ class AzimuthNeedleHud extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: accentColor.withOpacity(0.25),
+                      color: accentColor.withValues(alpha: 0.25),
                       blurRadius: 16,
                     ),
                   ],
@@ -205,7 +208,7 @@ class AzimuthNeedleHud extends StatelessWidget {
                         borderRadius: BorderRadius.circular(2),
                         boxShadow: [
                           BoxShadow(
-                            color: (isAligned ? const Color(0xFF10B981) : const Color(0xFF38BDF8)).withOpacity(0.5),
+                            color: (isAligned ? const Color(0xFF10B981) : const Color(0xFF38BDF8)).withValues(alpha: 0.5),
                             blurRadius: 6,
                           ),
                         ],
@@ -251,7 +254,7 @@ class _CompassDialPainter extends CustomPainter {
       ..strokeWidth = 2.0;
 
     final paintTickMinor = Paint()
-      ..color = dialColor.withOpacity(0.5)
+      ..color = dialColor.withValues(alpha: 0.5)
       ..strokeWidth = 1.0;
 
     // Draw ticks every 15 degrees
@@ -324,7 +327,7 @@ class _RadarGridPainter extends CustomPainter {
 
     // Subtle crosshairs
     final paintLine = Paint()
-      ..color = gridColor.withOpacity(0.4)
+      ..color = gridColor.withValues(alpha: 0.4)
       ..strokeWidth = 0.8;
 
     canvas.drawLine(Offset(center.dx, center.dy - maxRadius), Offset(center.dx, center.dy + maxRadius), paintLine);
@@ -348,7 +351,7 @@ class _TargetNeedlePainter extends CustomPainter {
 
     // Outer glow for needle
     final glowPaint = Paint()
-      ..color = color.withOpacity(isAligned ? 0.6 : 0.3)
+      ..color = color.withValues(alpha: isAligned ? 0.6 : 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = isAligned ? 6.0 : 4.0
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
@@ -381,7 +384,7 @@ class _TargetNeedlePainter extends CustomPainter {
       ..close();
 
     final tailPaint = Paint()
-      ..color = color.withOpacity(0.3)
+      ..color = color.withValues(alpha: 0.3)
       ..style = PaintingStyle.fill;
 
     canvas.drawPath(tailPath, tailPaint);

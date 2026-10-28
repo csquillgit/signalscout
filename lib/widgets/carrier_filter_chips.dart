@@ -63,7 +63,9 @@ class CarrierFilterChips extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 7.0),
         decoration: BoxDecoration(
-          color: isSelected ? activeColor.withOpacity(0.18) : const Color(0xFF1E293B),
+          color: isSelected
+              ? activeColor.withValues(alpha: 0.18)
+              : const Color(0xFF1E293B),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isSelected ? activeColor : const Color(0xFF334155),
@@ -72,7 +74,7 @@ class CarrierFilterChips extends StatelessWidget {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: activeColor.withOpacity(0.25),
+                    color: activeColor.withValues(alpha: 0.25),
                     blurRadius: 8,
                     spreadRadius: 1,
                   ),

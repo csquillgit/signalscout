@@ -9,7 +9,8 @@ class BoosterGuideScreen extends StatelessWidget {
       backgroundColor: const Color(0xFF0B0F19),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0, bottom: 94.0),
+          padding: const EdgeInsets.only(
+              left: 16.0, right: 16.0, top: 12.0, bottom: 94.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -121,14 +122,15 @@ class BoosterGuideScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(7.0),
                 decoration: BoxDecoration(
-                  color: iconColor.withOpacity(0.18),
+                  color: iconColor.withValues(alpha: 0.18),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(icon, color: iconColor, size: 20),
               ),
               const SizedBox(width: 10),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 3.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 7.0, vertical: 3.0),
                 decoration: BoxDecoration(
                   color: const Color(0xFF0B0F19),
                   borderRadius: BorderRadius.circular(6.0),

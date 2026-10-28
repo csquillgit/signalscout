@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/cell_tower.dart';
-import '../models/dead_zone.dart';
 import '../services/dead_zone_service.dart';
 import '../services/location_service.dart';
 
@@ -88,7 +87,8 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                   if (zones.isNotEmpty)
                     TextButton.icon(
                       onPressed: () => _confirmClearAll(context),
-                      icon: const Icon(Icons.delete_sweep, color: Color(0xFFEF4444), size: 16),
+                      icon: const Icon(Icons.delete_sweep,
+                          color: Color(0xFFEF4444), size: 16),
                       label: const Text(
                         'CLEAR ALL',
                         style: TextStyle(
@@ -105,15 +105,18 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
 
             // "Log Dead Spot" Action Card
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               padding: const EdgeInsets.all(14.0),
               decoration: BoxDecoration(
                 color: const Color(0xFF1E293B),
                 borderRadius: BorderRadius.circular(16.0),
-                border: Border.all(color: const Color(0xFFEF4444).withOpacity(0.5), width: 1.5),
+                border: Border.all(
+                    color: const Color(0xFFEF4444).withValues(alpha: 0.5),
+                    width: 1.5),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFFEF4444).withOpacity(0.12),
+                    color: const Color(0xFFEF4444).withValues(alpha: 0.12),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
@@ -126,10 +129,12 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                       Container(
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEF4444).withOpacity(0.15),
+                          color:
+                              const Color(0xFFEF4444).withValues(alpha: 0.15),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.signal_cellular_off, color: Color(0xFFEF4444), size: 22),
+                        child: const Icon(Icons.signal_cellular_off,
+                            color: Color(0xFFEF4444), size: 22),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -170,7 +175,8 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                         foregroundColor: Colors.white,
                         elevation: 0,
                         padding: const EdgeInsets.symmetric(vertical: 12.0),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
                       ),
                       icon: const Icon(Icons.bookmark_add, size: 18),
                       label: const Text(
@@ -194,16 +200,23 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.check_circle_outline, color: const Color(0xFF10B981).withOpacity(0.5), size: 48),
+                          Icon(Icons.check_circle_outline,
+                              color: const Color(0xFF10B981)
+                                  .withValues(alpha: 0.5),
+                              size: 48),
                           const SizedBox(height: 12),
                           const Text(
                             'No dead zones logged yet',
-                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800),
                           ),
                           const SizedBox(height: 6),
                           const Text(
                             'Tap "Mark Dead Spot Here" when cell service drops to 0 bars.',
-                            style: TextStyle(color: Color(0xFF94A3B8), fontSize: 12),
+                            style: TextStyle(
+                                color: Color(0xFF94A3B8), fontSize: 12),
                           ),
                         ],
                       ),
@@ -214,10 +227,12 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                       itemBuilder: (context, i) {
                         final item = zones[i];
                         final cColor = _carrierColor(item.carrier);
-                        final dateStr = DateFormat('MMM d, h:mm a').format(item.timestamp);
+                        final dateStr =
+                            DateFormat('MMM d, h:mm a').format(item.timestamp);
 
                         return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 6.0),
                           decoration: BoxDecoration(
                             color: const Color(0xFF1E293B),
                             borderRadius: BorderRadius.circular(16.0),
@@ -229,19 +244,26 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
                                         Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 2.5),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 7.0, vertical: 2.5),
                                           decoration: BoxDecoration(
-                                            color: cColor.withOpacity(0.18),
-                                            borderRadius: BorderRadius.circular(6.0),
-                                            border: Border.all(color: cColor.withOpacity(0.6)),
+                                            color:
+                                                cColor.withValues(alpha: 0.18),
+                                            borderRadius:
+                                                BorderRadius.circular(6.0),
+                                            border: Border.all(
+                                                color: cColor.withValues(
+                                                    alpha: 0.6)),
                                           ),
                                           child: Text(
-                                            item.carrier.displayName.toUpperCase(),
+                                            item.carrier.displayName
+                                                .toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 9.5,
                                               fontWeight: FontWeight.w900,
@@ -252,13 +274,18 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                                         ),
                                         const SizedBox(width: 8),
                                         Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 2.5),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 7.0, vertical: 2.5),
                                           decoration: BoxDecoration(
-                                            color: const Color(0xFFEF4444).withOpacity(0.18),
-                                            borderRadius: BorderRadius.circular(6.0),
+                                            color: const Color(0xFFEF4444)
+                                                .withValues(alpha: 0.18),
+                                            borderRadius:
+                                                BorderRadius.circular(6.0),
                                           ),
                                           child: Text(
-                                            item.signalBars == 0 ? '0 BARS • BLACKOUT' : '1 BAR • SOS ONLY',
+                                            item.signalBars == 0
+                                                ? '0 BARS • BLACKOUT'
+                                                : '1 BAR • SOS ONLY',
                                             style: const TextStyle(
                                               fontSize: 9.5,
                                               fontWeight: FontWeight.w800,
@@ -269,15 +296,18 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                                       ],
                                     ),
                                     PopupMenuButton<String>(
-                                      icon: const Icon(Icons.more_vert, color: Color(0xFF94A3B8), size: 18),
+                                      icon: const Icon(Icons.more_vert,
+                                          color: Color(0xFF94A3B8), size: 18),
                                       color: const Color(0xFF1E293B),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
-                                        side: const BorderSide(color: Color(0xFF334155)),
+                                        side: const BorderSide(
+                                            color: Color(0xFF334155)),
                                       ),
                                       onSelected: (val) {
                                         if (val == 'delete') {
-                                          _deadZoneService.deleteDeadZone(item.id);
+                                          _deadZoneService
+                                              .deleteDeadZone(item.id);
                                         }
                                       },
                                       itemBuilder: (context) => [
@@ -285,9 +315,14 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                                           value: 'delete',
                                           child: Row(
                                             children: [
-                                              Icon(Icons.delete_outline, color: Color(0xFFEF4444), size: 18),
+                                              Icon(Icons.delete_outline,
+                                                  color: Color(0xFFEF4444),
+                                                  size: 18),
                                               SizedBox(width: 8),
-                                              Text('Delete Entry', style: TextStyle(color: Color(0xFFEF4444), fontSize: 13)),
+                                              Text('Delete Entry',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFEF4444),
+                                                      fontSize: 13)),
                                             ],
                                           ),
                                         ),
@@ -321,7 +356,8 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                                 const SizedBox(height: 10),
                                 Row(
                                   children: [
-                                    const Icon(Icons.place_outlined, color: Color(0xFF64748B), size: 14),
+                                    const Icon(Icons.place_outlined,
+                                        color: Color(0xFF64748B), size: 14),
                                     const SizedBox(width: 4),
                                     Text(
                                       '${item.latitude.toStringAsFixed(4)}, ${item.longitude.toStringAsFixed(4)}',
@@ -357,7 +393,8 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
   }
 
   void _showLogDeadZoneDialog(BuildContext context) {
-    final titleCtrl = TextEditingController(text: 'Dead Spot at ${_locationService.activeLocationName}');
+    final titleCtrl = TextEditingController(
+        text: 'Dead Spot at ${_locationService.activeLocationName}');
     final notesCtrl = TextEditingController();
     CarrierType chosenCarrier = CarrierType.verizon;
     int bars = 0;
@@ -373,11 +410,16 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
           ),
           title: const Row(
             children: [
-              Icon(Icons.signal_cellular_off, color: Color(0xFFEF4444), size: 22),
+              Icon(Icons.signal_cellular_off,
+                  color: Color(0xFFEF4444), size: 22),
               SizedBox(width: 8),
               Text(
                 'LOG DEAD ZONE',
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w900, letterSpacing: 1.0, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.0,
+                    color: Colors.white),
               ),
             ],
           ),
@@ -391,36 +433,53 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                   style: const TextStyle(color: Colors.white, fontSize: 13),
                   decoration: InputDecoration(
                     labelText: 'Location / Landmark Name',
-                    labelStyle: const TextStyle(color: Color(0xFF94A3B8), fontSize: 11),
+                    labelStyle:
+                        const TextStyle(color: Color(0xFF94A3B8), fontSize: 11),
                     filled: true,
                     fillColor: const Color(0xFF0B0F19),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8)),
                   ),
                 ),
                 const SizedBox(height: 12),
-                const Text('Observed Signal Level:', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFF94A3B8))),
+                const Text('Observed Signal Level:',
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFF94A3B8))),
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    _buildSignalOption(0, '0 Bars (No Service)', bars, () => setDlgState(() => bars = 0)),
+                    _buildSignalOption(0, '0 Bars (No Service)', bars,
+                        () => setDlgState(() => bars = 0)),
                     const SizedBox(width: 8),
-                    _buildSignalOption(1, '1 Bar (SOS Only)', bars, () => setDlgState(() => bars = 1)),
+                    _buildSignalOption(1, '1 Bar (SOS Only)', bars,
+                        () => setDlgState(() => bars = 1)),
                   ],
                 ),
                 const SizedBox(height: 12),
-                const Text('Tested Carrier Network:', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFF94A3B8))),
+                const Text('Tested Carrier Network:',
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFF94A3B8))),
                 const SizedBox(height: 6),
                 DropdownButtonFormField<CarrierType>(
-                  value: chosenCarrier,
+                  initialValue: chosenCarrier,
                   dropdownColor: const Color(0xFF1E293B),
                   style: const TextStyle(color: Colors.white, fontSize: 13),
                   decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     fillColor: const Color(0xFF0B0F19),
                     filled: true,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8)),
                   ),
-                  items: CarrierType.values.map((c) => DropdownMenuItem(value: c, child: Text(c.displayName))).toList(),
+                  items: CarrierType.values
+                      .map((c) => DropdownMenuItem(
+                          value: c, child: Text(c.displayName)))
+                      .toList(),
                   onChanged: (val) {
                     if (val != null) setDlgState(() => chosenCarrier = val);
                   },
@@ -432,10 +491,12 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                   style: const TextStyle(color: Colors.white, fontSize: 13),
                   decoration: InputDecoration(
                     labelText: 'Field Notes (e.g. Ridge shadow, dense woods)',
-                    labelStyle: const TextStyle(color: Color(0xFF94A3B8), fontSize: 11),
+                    labelStyle:
+                        const TextStyle(color: Color(0xFF94A3B8), fontSize: 11),
                     filled: true,
                     fillColor: const Color(0xFF0B0F19),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8)),
                   ),
                 ),
               ],
@@ -444,10 +505,12 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text('CANCEL', style: TextStyle(color: Color(0xFF94A3B8))),
+              child: const Text('CANCEL',
+                  style: TextStyle(color: Color(0xFF94A3B8))),
             ),
             ElevatedButton(
               onPressed: () async {
+                final navigator = Navigator.of(context);
                 await _deadZoneService.addDeadZone(
                   title: titleCtrl.text,
                   latitude: _locationService.latitude,
@@ -456,13 +519,15 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
                   signalBars: bars,
                   notes: notesCtrl.text.trim(),
                 );
-                Navigator.pop(ctx);
+                if (!mounted) return;
+                navigator.pop();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFEF4444),
                 foregroundColor: Colors.white,
               ),
-              child: const Text('SAVE BREADCRUMB', style: TextStyle(fontWeight: FontWeight.bold)),
+              child: const Text('SAVE BREADCRUMB',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -470,7 +535,8 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
     );
   }
 
-  Widget _buildSignalOption(int value, String label, int selectedValue, VoidCallback onTap) {
+  Widget _buildSignalOption(
+      int value, String label, int selectedValue, VoidCallback onTap) {
     final isSel = value == selectedValue;
     return Expanded(
       child: InkWell(
@@ -479,9 +545,13 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
           decoration: BoxDecoration(
-            color: isSel ? const Color(0xFFEF4444).withOpacity(0.2) : const Color(0xFF0B0F19),
+            color: isSel
+                ? const Color(0xFFEF4444).withValues(alpha: 0.2)
+                : const Color(0xFF0B0F19),
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: isSel ? const Color(0xFFEF4444) : const Color(0xFF334155)),
+            border: Border.all(
+                color:
+                    isSel ? const Color(0xFFEF4444) : const Color(0xFF334155)),
           ),
           child: Center(
             child: Text(
@@ -490,7 +560,8 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w800,
-                color: isSel ? const Color(0xFFEF4444) : const Color(0xFF94A3B8),
+                color:
+                    isSel ? const Color(0xFFEF4444) : const Color(0xFF94A3B8),
               ),
             ),
           ),
@@ -504,16 +575,22 @@ class _DeadZoneLoggerScreenState extends State<DeadZoneLoggerScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: const Text('Clear All Dead Zones?', style: TextStyle(color: Colors.white, fontSize: 16)),
-        content: const Text('This will delete all saved dead spot breadcrumbs.', style: TextStyle(color: Color(0xFF94A3B8), fontSize: 13)),
+        title: const Text('Clear All Dead Zones?',
+            style: TextStyle(color: Colors.white, fontSize: 16)),
+        content: const Text('This will delete all saved dead spot breadcrumbs.',
+            style: TextStyle(color: Color(0xFF94A3B8), fontSize: 13)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('CANCEL', style: TextStyle(color: Color(0xFF94A3B8)))),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('CANCEL',
+                  style: TextStyle(color: Color(0xFF94A3B8)))),
           ElevatedButton(
             onPressed: () {
               _deadZoneService.clearAll();
               Navigator.pop(ctx);
             },
-            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFEF4444)),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFEF4444)),
             child: const Text('CLEAR ALL'),
           ),
         ],

@@ -85,8 +85,10 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
     }
 
     final double deviceHeading = _compassService.heading;
-    final int estimatedRssi = TowerDatabaseService.estimateRssiDbm(distanceMeters);
-    final String signalQuality = TowerDatabaseService.signalQualityLabel(estimatedRssi);
+    final int estimatedRssi =
+        TowerDatabaseService.estimateRssiDbm(distanceMeters);
+    final String signalQuality =
+        TowerDatabaseService.signalQualityLabel(estimatedRssi);
 
     Color signalColor = const Color(0xFF10B981);
     if (estimatedRssi < -115) {
@@ -142,12 +144,15 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
                 distanceMeters: distanceMeters,
                 hasTarget: activeTower != null,
                 carrierName: activeTower?.carrier.displayName ?? 'NO TARGET',
-                carrierColor: activeTower != null ? _carrierColor(activeTower.carrier) : const Color(0xFF64748B),
+                carrierColor: activeTower != null
+                    ? _carrierColor(activeTower.carrier)
+                    : const Color(0xFF64748B),
               ),
 
               // 3-Column Metric Overview Bar
               HudMetricBar(
-                azimuthText: '${targetBearing.toStringAsFixed(0).padLeft(3, '0')}°',
+                azimuthText:
+                    '${targetBearing.toStringAsFixed(0).padLeft(3, '0')}°',
                 azimuthSub: cardinal,
                 distanceText: distanceStr,
                 distanceSub: '${(distanceMeters / 1000).toStringAsFixed(1)} km',
@@ -160,11 +165,11 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
 
               // Active Locked Target Info Card
               if (activeTower != null)
-                _buildActiveTowerCard(context, activeTower, distanceStr, targetBearing, cardinal),
+                _buildActiveTowerCard(
+                    context, activeTower, distanceStr, targetBearing, cardinal),
 
               // Compass Hardware Simulation / Adjuster (helps on emulator/Mac)
-              if (!_compassService.hasHardwareCompass)
-                _buildHeadingSlider(),
+              if (!_compassService.hasHardwareCompass) _buildHeadingSlider(),
             ],
           ),
         ),
@@ -185,7 +190,9 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
         children: [
           Icon(
             _locationService.isSimulated ? Icons.tune : Icons.gps_fixed,
-            color: _locationService.isSimulated ? const Color(0xFFF59E0B) : const Color(0xFF10B981),
+            color: _locationService.isSimulated
+                ? const Color(0xFFF59E0B)
+                : const Color(0xFF10B981),
             size: 18,
           ),
           const SizedBox(width: 10),
@@ -220,11 +227,13 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
             onTap: () => _showLocationPresetPicker(context),
             borderRadius: BorderRadius.circular(8),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
               decoration: BoxDecoration(
                 color: const Color(0xFF0B0F19),
                 borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(color: const Color(0xFF38BDF8).withOpacity(0.5)),
+                border: Border.all(
+                    color: const Color(0xFF38BDF8).withValues(alpha: 0.5)),
               ),
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
@@ -273,11 +282,12 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 3.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 3.0),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.18),
+                  color: color.withValues(alpha: 0.18),
                   borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: color.withOpacity(0.6)),
+                  border: Border.all(color: color.withValues(alpha: 0.6)),
                 ),
                 child: Text(
                   tower.carrier.displayName.toUpperCase(),
@@ -325,7 +335,8 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
             children: [
               for (final b in tower.bands)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0, vertical: 2.0),
                   decoration: BoxDecoration(
                     color: const Color(0xFF0B0F19),
                     borderRadius: BorderRadius.circular(4.0),
@@ -352,7 +363,7 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E293B).withOpacity(0.6),
+        color: const Color(0xFF1E293B).withValues(alpha: 0.6),
         borderRadius: BorderRadius.circular(12.0),
         border: Border.all(color: const Color(0xFF334155)),
       ),
@@ -432,7 +443,8 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.close, color: Color(0xFF94A3B8), size: 20),
+                      icon: const Icon(Icons.close,
+                          color: Color(0xFF94A3B8), size: 20),
                       onPressed: () => Navigator.pop(ctx),
                     ),
                   ],
@@ -440,15 +452,22 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
               ),
               const Divider(color: Color(0xFF334155)),
               ListTile(
-                leading: const Icon(Icons.my_location, color: Color(0xFF10B981)),
-                title: const Text('Live GPS Device Position', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
-                subtitle: const Text('Use phone internal GPS sensors', style: TextStyle(color: Color(0xFF94A3B8), fontSize: 12)),
+                leading:
+                    const Icon(Icons.my_location, color: Color(0xFF10B981)),
+                title: const Text('Live GPS Device Position',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w700)),
+                subtitle: const Text('Use phone internal GPS sensors',
+                    style: TextStyle(color: Color(0xFF94A3B8), fontSize: 12)),
                 onTap: () async {
+                  final messenger = ScaffoldMessenger.maybeOf(context);
                   Navigator.pop(ctx);
                   final ok = await _locationService.enableLiveGps();
-                  if (!ok && mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('GPS permission needed or not available.')),
+                  if (!ok && mounted && messenger != null) {
+                    messenger.showSnackBar(
+                      const SnackBar(
+                          content:
+                              Text('GPS permission needed or not available.')),
                     );
                   }
                 },
@@ -475,7 +494,9 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
                     return ListTile(
                       leading: Icon(
                         Icons.terrain,
-                        color: isSel ? const Color(0xFF38BDF8) : const Color(0xFF64748B),
+                        color: isSel
+                            ? const Color(0xFF38BDF8)
+                            : const Color(0xFF64748B),
                       ),
                       title: Text(
                         p.name,
@@ -486,9 +507,13 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
                       ),
                       subtitle: Text(
                         '${p.region} • ${p.elevationMeters.toStringAsFixed(0)}m AMSL',
-                        style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 11),
+                        style: const TextStyle(
+                            color: Color(0xFF94A3B8), fontSize: 11),
                       ),
-                      trailing: isSel ? const Icon(Icons.check, color: Color(0xFF38BDF8), size: 18) : null,
+                      trailing: isSel
+                          ? const Icon(Icons.check,
+                              color: Color(0xFF38BDF8), size: 18)
+                          : null,
                       onTap: () {
                         _locationService.applyPreset(p);
                         Navigator.pop(ctx);
