@@ -326,12 +326,16 @@ class TacticalLegalSheet extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
-                      'I UNDERSTAND & ACKNOWLEDGE',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.5,
-                        fontSize: 13,
+                    child: const FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'I UNDERSTAND & ACKNOWLEDGE',
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.1,
+                          fontSize: 13,
+                        ),
                       ),
                     ),
                   ),
