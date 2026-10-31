@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/tactical_legal_sheet.dart';
 
 class BoosterGuideScreen extends StatelessWidget {
   const BoosterGuideScreen({super.key});
@@ -92,6 +93,56 @@ class BoosterGuideScreen extends StatelessWidget {
                     'The FCC requires all communications towers taller than 200 feet AGL (or within flight safety paths) to register with an Antenna Structure Registration (ASR) number.\n\n'
                     '• SignalScout stores ASR registry numbers directly offline.\n'
                     '• In the field, look for a 7-digit embossed metal placard attached to the compound security gate.',
+              ),
+
+              const SizedBox(height: 16),
+
+              // Legal & Telemetry Disclaimer Card
+              InkWell(
+                onTap: () => TacticalLegalSheet.show(context, signalScoutLegal),
+                borderRadius: BorderRadius.circular(14),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E293B),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: const Color(0xFFF59E0B).withValues(alpha: 0.5),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.shield_outlined,
+                          color: Color(0xFFF59E0B), size: 22),
+                      const SizedBox(width: 12),
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'About & Safety Advisory',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 2),
+                            Text(
+                              'FCC/OpenCellID data attribution, terms, and 911 disclaimers',
+                              style: TextStyle(
+                                color: Color(0xFF94A3B8),
+                                fontSize: 11,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(Icons.chevron_right,
+                          color: Color(0xFF94A3B8), size: 20),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

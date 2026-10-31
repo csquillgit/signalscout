@@ -6,6 +6,7 @@ import '../services/tower_database_service.dart';
 import '../widgets/azimuth_needle_hud.dart';
 import '../widgets/carrier_filter_chips.dart';
 import '../widgets/hud_metric_bar.dart';
+import '../widgets/tactical_legal_sheet.dart';
 
 class ScoutNeedleScreen extends StatefulWidget {
   const ScoutNeedleScreen({super.key});
@@ -252,6 +253,39 @@ class _ScoutNeedleScreenState extends State<ScoutNeedleScreen> {
                 ],
               ),
             ),
+          ),
+          const SizedBox(width: 6),
+          PopupMenuButton<String>(
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(),
+            icon: const Icon(Icons.more_vert_rounded,
+                color: Color(0xFF94A3B8), size: 20),
+            color: const Color(0xFF1E293B),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: const BorderSide(color: Color(0xFF334155)),
+            ),
+            onSelected: (value) {
+              if (value == 'legal') {
+                TacticalLegalSheet.show(context, signalScoutLegal);
+              }
+            },
+            itemBuilder: (ctx) => [
+              const PopupMenuItem(
+                value: 'legal',
+                child: Row(
+                  children: [
+                    Icon(Icons.shield_outlined,
+                        color: Color(0xFF38BDF8), size: 18),
+                    SizedBox(width: 10),
+                    Text(
+                      'Legal & Advisory',
+                      style: TextStyle(color: Colors.white, fontSize: 13),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
