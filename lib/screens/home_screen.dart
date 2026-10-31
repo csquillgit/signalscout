@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/tactical_legal_sheet.dart';
 import 'booster_guide_screen.dart';
 import 'dead_zone_logger_screen.dart';
 import 'scout_needle_screen.dart';
@@ -13,6 +14,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      TacticalLegalSheet.checkFirstRun(context, signalScoutLegal);
+    });
+  }
 
   void _onTabTapped(int index) {
     setState(() {
